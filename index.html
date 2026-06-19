@@ -1,400 +1,1114 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ГУОБДД МВД России — Официальный портал</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background: #e5e5e5;
-            padding: 30px 20px;
-        }
-        .page {
-            max-width: 1050px;
-            margin: 0 auto;
-            background: #ffffff;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        /* СТРОКА СТАТУСА */
-        .status-bar {
-            background: #1a3c6e;
-            color: #fff;
-            font-size: 12px;
-            padding: 6px 25px;
-            display: flex;
-            justify-content: space-between;
-            font-family: Arial, sans-serif;
-            letter-spacing: 0.3px;
-        }
-        .status-bar a {
-            color: #ffcc00;
-            text-decoration: none;
-            margin-left: 18px;
-        }
-        /* ШАПКА */
-        .header {
-            background: #ffffff;
-            padding: 18px 30px 12px 30px;
-            border-bottom: 4px solid #1a3c6e;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .header .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .header .logo .emblem {
-            font-size: 48px;
-            font-weight: bold;
-            color: #1a3c6e;
-            line-height: 1;
-        }
-        .header .logo .text {
-            line-height: 1.2;
-        }
-        .header .logo .text .main {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a3c6e;
-            letter-spacing: 1px;
-        }
-        .header .logo .text .sub {
-            font-size: 11px;
-            color: #444;
-            font-family: Arial, sans-serif;
-        }
-        .header .search {
-            margin-left: auto;
-            display: flex;
-            font-family: Arial, sans-serif;
-        }
-        .header .search input {
-            padding: 6px 12px;
-            border: 1px solid #aaa;
-            font-size: 13px;
-            width: 210px;
-            background: #fafafa;
-        }
-        .header .search button {
-            padding: 6px 18px;
-            background: #1a3c6e;
-            color: #fff;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        /* МЕНЮ */
-        .menu {
-            background: #1a3c6e;
-            display: flex;
-            flex-wrap: wrap;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-        }
-        .menu a {
-            color: #fff;
-            padding: 12px 28px;
-            text-decoration: none;
-            border-right: 1px solid #2a5a8a;
-            transition: background 0.15s;
-        }
-        .menu a:hover {
-            background: #2a5a8a;
-        }
-        /* ХЛЕБНЫЕ КРОШКИ */
-        .bread {
-            padding: 12px 30px;
-            font-size: 13px;
-            background: #f3f6fa;
-            border-bottom: 1px solid #d0d8e0;
-            font-family: Arial, sans-serif;
-        }
-        .bread a {
-            color: #1a3c6e;
-            text-decoration: none;
-        }
-        .bread span {
-            color: #333;
-        }
-        /* ОСНОВНОЙ КОНТЕНТ */
-        .content {
-            padding: 30px 35px 40px 35px;
-        }
-        .content h1 {
-            font-size: 28px;
-            color: #1a3c6e;
-            border-bottom: 2px solid #1a3c6e;
-            padding-bottom: 10px;
-            margin-bottom: 18px;
-            font-weight: 700;
-        }
-        .doc-meta {
-            background: #f0f4fb;
-            padding: 14px 20px;
-13:02
-border-left: 6px solid #1a3c6e;
-            margin-bottom: 25px;
-            font-size: 14px;
-            font-family: Arial, sans-serif;
-        }
-        .doc-meta strong {
-            color: #1a3c6e;
-        }
-        .doc-meta .green {
-            color: #006633;
-            font-weight: bold;
-        }
-        .content p {
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 16px;
-            text-align: justify;
-        }
-        .rule-box {
-            background: #f2f7fe;
-            border: 1.5px solid #b3cce0;
-            padding: 22px 28px;
-            margin: 24px 0;
-            border-radius: 6px;
-        }
-        .rule-box h2 {
-            font-size: 20px;
-            color: #1a3c6e;
-            margin-bottom: 12px;
-            border-bottom: 1px solid #ccdce8;
-            padding-bottom: 6px;
-        }
-        .rule-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        .rule-box ul li {
-            padding: 7px 0 7px 34px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="%231a3c6e"/></svg>') left center no-repeat;
-            background-size: 16px;
-            font-size: 15px;
-            line-height: 1.5;
-        }
-        .rule-box .big-allow {
-            margin-top: 18px;
-            font-size: 22px;
-            font-weight: 700;
-            color: #005c2b;
-            background: #e3f3e8;
-            padding: 12px 18px;
-            border-radius: 4px;
-            text-align: center;
-            border: 1px solid #88bb99;
-            letter-spacing: 0.5px;
-        }
-        .warning-note {
-            background: #fef7e8;
-            border-left: 5px solid #cc8800;
-            padding: 14px 20px;
-            margin: 20px 0;
-            font-size: 15px;
-            font-family: Arial, sans-serif;
-        }
-        .signature-block {
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 2px solid #d0d8e0;
-            font-size: 15px;
-        }
-        .signature-block .rank {
-            font-weight: 700;
-            color: #1a3c6e;
-        }
-        .signature-block .name {
-            font-weight: 700;
-            font-size: 17px;
-        }
-        .signature-block .stamp {
-            margin-top: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #1a3c6e;
-            background: #f0f4fa;
-            display: inline-block;
-            padding: 6px 16px;
-            border: 1px dashed #1a3c6e;
-            border-radius: 3px;
-        }
-        .footer {
-            background: #1a2f4a;
-            color: #ccd8e0;
-            padding: 20px 30px;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            border-top: 3px solid #ffcc00;
-        }
-        .footer a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-        .footer .copy {
-            color: #88aacc;
-        }
-        .print-btn {
-            background: #1a3c6e;
-            color: #fff;
-            border: none;
-            padding: 8px 22px;
-            font-size: 14px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .print-btn:hover {
-            background: #2a5a8a;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ГИБДД.РФ — Официальный сайт</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      background: #eef1f5;
+      padding: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* --- ВЕРХНЯЯ ПЛАНКА --- */
+    .topbar {
+      background: #1a3c6e;
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 28px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .topbar a {
+      color: #ffd966;
+      margin-left: 18px;
+      transition: 0.2s;
+    }
+
+    .topbar a:hover {
+      text-decoration: underline;
+    }
+
+    .topbar i {
+      margin-right: 6px;
+    }
+
+    /* --- ШАПКА --- */
+    .header {
+      background: #fff;
+      padding: 18px 28px 14px 28px;
+      border-bottom: 4px solid #1a3c6e;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-left .emblem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-left .emblem svg {
+      width: 56px;
+      height: 56px;
+    }
+
+    .header-left .title .main {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a3c6e;
+      letter-spacing: 0.3px;
+    }
+
+    .header-left .title .sub {
+      font-size: 11px;
+      color: #444;
+      font-weight: 400;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .header-right .search-form {
+      display: flex;
+    }
+
+    .header-right .search-form input {
+      padding: 8px 14px;
+      border: 1px solid #b0b8c4;
+      font-size: 14px;
+      width: 220px;
+      background: #fafbfc;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+    }
+
+    .header-right .search-form input:focus {
+      border-color: #1a3c6e;
+    }
+
+    .header-right .search-form button {
+      padding: 8px 20px;
+      background: #1a3c6e;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 0 4px 4px 0;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .header-right .search-form button:hover {
+      background: #0f2c50;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      background: #f0f2f5;
+      border-radius: 4px;
+      padding: 3px;
+    }
+
+    .lang-switch a {
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a3c6e;
+      transition: 0.2s;
+    }
+
+    .lang-switch a.active {
+      background: #1a3c6e;
+      color: #fff;
+    }
+
+    .lang-switch a:hover:not(.active) {
+      background: #d0d8e4;
+    }
+
+    /* --- МЕНЮ --- */
+    .menu {
+      background: #1a3c6e;
+      display: flex;
+      flex-wrap: wrap;
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      border-bottom: 2px solid #ffc107;
+      padding: 0 8px;
+    }
+
+    .menu a {
+      color: #fff;
+      padding: 13px 24px;
+      border-right: 1px solid #2a5a8a;
+      transition: background 0.2s;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu a:hover {
+      background: #2a5a8a;
+    }
+
+    .menu a:last-child {
+      border-right: none;
+    }
+
+    .menu a i {
+      font-size: 15px;
+    }
+
+    /* --- ХЛЕБНЫЕ КРОШКИ --- */
+    .breadcrumbs {
+      padding: 12px 28px;
+      font-size: 13px;
+      background: #f5f7fa;
+      border-bottom: 1px solid #d5dde6;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .breadcrumbs a {
+      color: #1a3c6e;
+    }
+
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumbs span {
+      color: #333;
+    }
+
+    .breadcrumbs i {
+      margin-right: 4px;
+    }
+
+    /* --- ОСНОВНОЙ КОНТЕНТ --- */
+    .content {
+      padding: 30px 30px 40px 30px;
+    }
+
+    .content h1 {
+      font-size: 28px;
+      color: #1a3c6e;
+      border-bottom: 3px solid #1a3c6e;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .content h1 i {
+      margin-right: 12px;
+    }
+
+    .doc-meta {
+      background: #f0f5fc;
+      padding: 14px 22px;
+      border-left: 5px solid #1a3c6e;
+      margin-bottom: 24px;
+      font-size: 14px;
+      font-family: 'Arial', sans-serif;
+      border-radius: 0 6px 6px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+    }
+
+    .doc-meta strong {
+      color: #1a3c6e;
+    }
+
+    .doc-meta .green {
+      color: #006633;
+      font-weight: 700;
+    }
+
+    .doc-meta i {
+      margin-right: 4px;
+    }
+
+    .content p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .rule-box {
+      background: #f2f8ff;
+      border: 1.5px solid #b8cce0;
+      padding: 24px 28px;
+      margin: 28px 0;
+      border-radius: 8px;
+    }
+
+    .rule-box h2 {
+      font-size: 20px;
+      color: #1a3c6e;
+      border-bottom: 1px solid #c8d8e8;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .rule-box h2 i {
+      color: #006633;
+      margin-right: 8px;
+    }
+
+    .rule-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .rule-box ul li {
+      padding: 8px 0 8px 38px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="%231a3c6e"/></svg>') left center no-repeat;
+      background-size: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      border-bottom: 1px solid #e6eef6;
+    }
+
+    .rule-box ul li:last-child {
+      border-bottom: none;
+    }
+
+    .rule-box ul li i {
+      margin-right: 10px;
+      color: #1a3c6e;
+      width: 20px;
+    }
+
+    .rule-box .big-allow {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #005c2b;
+      background: #e3f3e8;
+      padding: 14px 22px;
+      border-radius: 6px;
+      text-align: center;
+      border: 2px solid #88bb99;
+    }
+
+    .rule-box .big-allow i {
+      margin-right: 10px;
+    }
+
+    .warning-box {
+      background: #fef7e8;
+      border-left: 5px solid #cc8800;
+      padding: 16px 22px;
+      margin: 24px 0;
+      font-size: 15px;
+      font-family: 'Arial', sans-serif;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .warning-box i {
+      margin-right: 8px;
+      color: #cc8800;
+    }
+
+    .signature {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 2px solid #d5dde6;
+      font-size: 15px;
+    }
+
+    .signature .rank {
+      font-weight: 700;
+      color: #1a3c6e;
+    }
+
+    .signature .name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .signature .stamp {
+      margin-top: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #1a3c6e;
+      background: #f0f5fc;
+      display: inline-block;
+      padding: 6px 18px;
+      border: 1px dashed #1a3c6e;
+      border-radius: 4px;
+    }
+
+    .signature .stamp i {
+      margin-right: 6px;
+    }
+
+    .signature .actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .signature .actions a,
+    .signature .actions button {
+      background: #1a3c6e;
+      color: #fff;
+      padding: 9px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .signature .actions a {
+      background: #005a8a;
+    }
+
+    .signature .actions a:hover,
+    .signature .actions button:hover {
+      opacity: 0.85;
+      transform: scale(1.01);
+    }
+
+    .content-row {
+      display: flex;
+      gap: 30px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .content-row .main-col {
+      flex: 3;
+      min-width: 280px;
+    }
+
+    .content-row .side-col {
+      flex: 1;
+      min-width: 210px;
+    }
+
+    .side-col .side-box {
+      background: #f6fafd;
+      border: 1px solid #d0dce8;
+      padding: 18px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .side-col .side-box h3 {
+      font-size: 15px;
+      color: #1a3c6e;
+      border-bottom: 1px solid #c8d6e4;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .side-col .side-box h3 i {
+      margin-right: 8px;
+    }
+
+    .side-col .side-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .side-col .side-box ul li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eaeef4;
+      font-size: 13px;
+    }
+
+    .side-col .side-box ul li:last-child {
+      border-bottom: none;
+    }
+
+    .side-col .side-box ul li a {
+      color: #1a3c6e;
+    }
+
+    .side-col .side-box ul li a:hover {
+      text-decoration: underline;
+    }
+
+    .side-col .side-box ul li i {
+      margin-right: 8px;
+      color: #1a3c6e;
+      width: 18px;
+    }
+
+    .side-col .side-box .phone {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a3c6e;
+    }
+
+    .side-col .side-box .phone i {
+      margin-right: 8px;
+    }
+
+    /* --- ФУТЕР-КАРТА --- */
+    .footer-links {
+      background: #eaf0f6;
+      padding: 24px 30px;
+      font-family: 'Arial', sans-serif;
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      border-top: 1px solid #c8d2de;
+    }
+
+    .footer-links .col {
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .footer-links .col h4 {
+      font-size: 13px;
+      color: #1a3c6e;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .footer-links .col a {
+      display: block;
+      color: #1a3c6e;
+      padding: 3px 0;
+      font-size: 12px;
+    }
+
+    .footer-links .col a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-links .col a i {
+      margin-right: 6px;
+      width: 16px;
+    }
+
+    /* --- ОСНОВНОЙ ФУТЕР --- */
+    .footer {
+      background: #0a2647;
+      color: #b8c8dd;
+      padding: 20px 30px;
+      font-family: 'Arial', sans-serif;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border-top: 3px solid #ffc107;
+    }
+
+    .footer a {
+      color: #ffd966;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer .copy {
+      color: #7a9abb;
+    }
+
+    .footer i {
+      margin-right: 6px;
+    }
+
+    /* --- АДАПТИВ --- */
+    @media (max-width: 800px) {
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-right {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .header-right .search-form input {
+        width: 100%;
+      }
+      .menu a {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+      .content {
+        padding: 18px;
+      }
+      .rule-box {
+        padding: 16px;
+      }
+      .topbar {
+        font-size: 11px;
+        padding: 6px 14px;
+      }
+      .topbar a {
+        margin-left: 8px;
+        font-size: 11px;
+      }
+      .doc-meta {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .lang-switch a {
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+    }
+
+    @media print {
+      .topbar,
+      .menu,
+      .header-right,
+      .breadcrumbs,
+      .footer-links,
+      .footer,
+      .side-col,
+      .actions,
+      .search-form,
+      .lang-switch {
+        display: none !important;
+      }
+      .wrapper {
+        box-shadow: none;
+        border: 1px solid #000;
+      }
+      body {
+        background: #fff;
+        padding: 0;
+      }
+    }
+
+    /* --- РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ --- */
+    .high-contrast {
+      background: #000 !important;
+      color: #fff !important;
+    }
+
+    .high-contrast .wrapper {
+      background: #000 !important;
+    }
+
+    .high-contrast .header,
+    .high-contrast .content,
+    .high-contrast .topbar,
+    .high-contrast .menu,
+    .high-contrast .footer,
+    .high-contrast .footer-links,
+    .high-contrast .side-box,
+    .high-contrast .rule-box,
+    .high-contrast .doc-meta,
+    .high-contrast .warning-box {
+      background: #111 !important;
+      color: #fff !important;
+      border-color: #444 !important;
+    }
+
+    .high-contrast a {
+      color: #ffcc00 !important;
+    }
+
+    .high-contrast .topbar a {
+      color: #ffcc00 !important;
+    }
+
+    .high-contrast .menu a {
+      border-color: #444 !important;
+    }
+
+    .high-contrast .header-left .title .main,
+    .high-contrast .header-left .title .sub {
+      color: #fff !important;
+    }
+
+    .high-contrast .content h1 {
+      color: #fff !important;
+      border-color: #666 !important;
+    }
+
+    .high-contrast .rule-box .big-allow {
+      background: #222 !important;
+      color: #88dd99 !important;
+      border-color: #88dd99 !important;
+    }
+
+    .high-contrast .signature .stamp {
+      background: #222 !important;
+      color: #ffcc00 !important;
+      border-color: #ffcc00 !important;
+    }
+
+    .high-contrast .signature .rank,
+    .high-contrast .signature .name {
+      color: #fff !important;
+    }
+
+    .high-contrast .footer .copy {
+      color: #aaa !important;
+    }
+
+    .high-contrast .side-col .side-box h3 {
+      color: #fff !important;
+      border-color: #444 !important;
+    }
+
+    .high-contrast .side-col .side-box ul li a {
+      color: #ffcc00 !important;
+    }
+
+    .high-contrast .breadcrumbs a {
+      color: #ffcc00 !important;
+    }
+
+    .high-contrast .breadcrumbs span {
+      color: #ccc !important;
+    }
+
+    .high-contrast .doc-meta strong,
+    .high-contrast .doc-meta .green {
+      color: #88dd99 !important;
+    }
+
+    .high-contrast input,
+    .high-contrast button {
+      background: #222 !important;
+      color: #fff !important;
+      border-color: #555 !important;
+    }
+
+    .high-contrast .lang-switch {
+      background: #222 !important;
+    }
+
+    .high-contrast .lang-switch a {
+      color: #fff !important;
+    }
+
+    .high-contrast .lang-switch a.active {
+      background: #ffcc00 !important;
+      color: #000 !important;
+    }
+
+    .font-large {
+      font-size: 1.4em !important;
+    }
+
+    .font-large p,
+    .font-large li,
+    .font-large .content p,
+    .font-large .rule-box ul li,
+    .font-large .doc-meta,
+    .font-large .side-box,
+    .font-large .warning-box {
+      font-size: 1.3em !important;
+    }
+
+    .font-large h1 {
+      font-size: 2em !important;
+    }
+
+    .font-large .menu a {
+      font-size: 1.2em !important;
+    }
+  </style>
 </head>
 <body>
-<div class="page">
 
-    <!-- СТРОКА СТАТУСА -->
-    <div class="status-bar">
-        <span>Официальный интернет-портал ГУОБДД МВД России</span>
-        <span>
-            <a href="#">Версия для слабовидящих</a>
-            <a href="#">Eng</a>
-            <a href="#">Портал госуслуг</a>
-        </span>
+  <!-- ===== ОБЁРТКА ===== -->
+  <div class="wrapper" id="mainWrapper">
+
+    <!-- ===== ВЕРХНЯЯ ПЛАНКА ===== -->
+    <div class="topbar">
+      <span><i class="fas fa-shield-alt"></i> Официальный портал ГУОБДД МВД России</span>
+      <span>
+        <a href="#" id="visionToggle"><i class="fas fa-eye"></i> Версия для слабовидящих</a>
+        <a href="#" id="langToggle"><i class="fas fa-language"></i> English</a>
+        <a href="#" onclick="alert('Переход на портал Госуслуг')"><i class="fas fa-user-check"></i> Госуслуги</a>
+      </span>
     </div>
 
-    <!-- ШАПКА -->
+    <!-- ===== ШАПКА ===== -->
     <div class="header">
-        <div class="logo">
-            <div class="emblem">⚔️ </div>
-            <div class="text">
-13:02
-<div class="main">ГИБДД.РФ</div>
-                <div class="sub">Главное управление по обеспечению безопасности дорожного движения</div>
-            </div>
+      <div class="header-left">
+        <div class="emblem">
+          <!-- Герб РФ (SVG) -->
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" stroke="#1a3c6e" stroke-width="2"/>
+            <circle cx="30" cy="30" r="22" stroke="#1a3c6e" stroke-width="1.5"/>
+            <path d="M30 8 L30 52 M8 30 L52 30" stroke="#1a3c6e" stroke-width="1" opacity="0.3"/>
+            <text x="30" y="36" font-size="18" text-anchor="middle" fill="#1a3c6e" font-weight="bold">РФ</text>
+            <circle cx="30" cy="30" r="4" fill="#1a3c6e"/>
+          </svg>
+          <span style="font-size:32px; font-weight:700; color:#1a3c6e; margin-left:4px;">⚔️</span>
         </div>
-        <div class="search">
-            <input type="text" placeholder="Поиск по сайту...">
-            <button>Найти</button>
+        <div class="title">
+          <div class="main">ГИБДД.РФ</div>
+          <div class="sub">Главное управление по обеспечению безопасности дорожного движения</div>
         </div>
+      </div>
+      <div class="header-right">
+        <div class="search-form">
+          <input type="text" placeholder="Поиск по сайту..." id="searchInput">
+          <button onclick="alert('Поиск: ' + document.getElementById('searchInput').value)"><i class="fas fa-search"></i> Найти</button>
+        </div>
+        <div class="lang-switch">
+          <a href="#" class="active" id="ruLang">RU</a>
+          <a href="#" id="enLang">EN</a>
+        </div>
+      </div>
     </div>
 
-    <!-- МЕНЮ -->
+    <!-- ===== МЕНЮ ===== -->
     <div class="menu">
-        <a href="#">Главная</a>
-        <a href="#">Новости</a>
-        <a href="#">Документы</a>
-        <a href="#">Для граждан</a>
-        <a href="#">Обращения</a>
-        <a href="#">Контакты</a>
+      <a href="#" onclick="alert('Главная')"><i class="fas fa-home"></i> Главная</a>
+      <a href="#" onclick="alert('Новости')"><i class="fas fa-newspaper"></i> Новости</a>
+      <a href="#" onclick="alert('Документы')"><i class="fas fa-file-alt"></i> Документы</a>
+      <a href="#" onclick="alert('Для граждан')"><i class="fas fa-users"></i> Для граждан</a>
+      <a href="#" onclick="alert('Обращения')"><i class="fas fa-envelope"></i> Обращения</a>
+      <a href="#" onclick="alert('Контакты')"><i class="fas fa-phone-alt"></i> Контакты</a>
+      <a href="#" onclick="alert('Карта сайта')"><i class="fas fa-sitemap"></i> Карта сайта</a>
     </div>
 
-    <!-- ХЛЕБНЫЕ КРОШКИ -->
-    <div class="bread">
-        <a href="#">Главная</a> / <a href="#">Для граждан</a> / <a href="#">СИМ</a> / <span>Официальное разъяснение № 05/23-142-СИМ</span>
+    <!-- ===== ХЛЕБНЫЕ КРОШКИ ===== -->
+    <div class="breadcrumbs">
+      <a href="#" onclick="alert('Главная')"><i class="fas fa-home"></i> Главная</a> /
+      <a href="#" onclick="alert('Для граждан')"><i class="fas fa-users"></i> Для граждан</a> /
+      <a href="#" onclick="alert('СИМ')"><i class="fas fa-motorcycle"></i> СИМ</a> /
+      <span><i class="fas fa-file-pdf"></i> Разъяснение № 05/23-142-СИМ</span>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <div class="content">
 
-        <h1>О порядке движения электросамокатов и иных СИМ по тротуарам</h1>
+      <h1><i class="fas fa-gavel"></i> О движении электросамокатов (СИМ) по тротуарам</h1>
 
-        <div class="doc-meta">
-            <strong>Документ:</strong> разъяснение ГУОБДД МВД России &nbsp;|&nbsp;
-            <strong>Номер:</strong> 05/23-142-СИМ &nbsp;|&nbsp;
-            <strong>Дата:</strong> 17.06.2024 &nbsp;|&nbsp;
-            <strong>Статус:</strong> <span class="green">◉ Действует</span> &nbsp;|&nbsp;
-            <strong>Регистрация в Минюсте:</strong> № 78912
-        </div>
+      <div class="doc-meta">
+        <span><i class="fas fa-file-signature"></i> <strong>Документ:</strong> Разъяснение ГУОБДД</span>
+        <span><i class="fas fa-hashtag"></i> <strong>Номер:</strong> 05/23-142-СИМ</span>
+        <span><i class="fas fa-calendar-alt"></i> <strong>Дата:</strong> 18.06.2024</span>
+        <span><strong>Статус:</strong> <span class="green"><i class="fas fa-check-circle"></i> Действует</span></span>
+        <span><i class="fas fa-registered"></i> <strong>Рег. в Минюсте:</strong> № 79134</span>
+      </div>
 
-        <p>
-            В связи с участившимися вопросами граждан и сотрудников ГИБДД о применении Правил дорожного движения
-            к средствам индивидуальной мобильности (СИМ), а также в целях формирования единой правоприменительной практики,
-            <strong>Главное управление по обеспечению безопасности дорожного движения МВД России</strong> подготовило
-            настоящее официальное разъяснение.
-        </p>
+      <div class="content-row">
+        <div class="main-col">
 
-        <p>
-            В соответствии с Федеральным законом № 197-ФЗ «О безопасности дорожного движения»,
-            а также с учётом анализа судебной практики и обращений регионов, <strong>установлен следующий порядок</strong>:
-        </p>
+          <p>
+            <i class="fas fa-info-circle" style="color:#1a3c6e;"></i>
+            В связи с многочисленными обращениями граждан, а также в целях формирования единообразной
+            практики применения Правил дорожного движения, <strong>ГУОБДД МВД России</strong> подготовило
+            официальное разъяснение по вопросу передвижения на электросамокатах, моноколёсах, гироскутерах
+            и иных средствах индивидуальной мобильности (СИМ) по тротуарам.
+          </p>
 
-        <div class="rule-box">
-            <h2>Условия, при которых движение по тротуару РАЗРЕШЕНО</h2>
+          <p>
+            Настоящее разъяснение разработано на основании Федерального закона № 197-ФЗ
+            «О безопасности дорожного движения», а также с учётом сложившейся судебной практики
+            (в том числе Определения Верховного Суда РФ № 45-КГ24-12).
+          </p>
+
+          <!-- ===== КАРТОЧКА С УСЛОВИЯМИ ===== -->
+          <div class="rule-box">
+            <h2><i class="fas fa-check-circle"></i> Условия, при которых движение по тротуару РАЗРЕШЕНО</h2>
             <ul>
-                <li><strong>Максимальная конструктивная скорость устройства — до 60 км/ч</strong> (включительно). При превышении скорости свыше 60 км/ч движение по тротуарам запрещается.</li>
-                <li><strong>Масса устройства — до 100 кг</strong> (включительно). Устройства тяжелее 100 кг приравниваются к мопедам и подлежат регистрации.</li>
-                <li><strong>Отсутствие велодорожек, велопешеходных зон или выделенных полос для СИМ</strong> на соответствующем участке. При наличии инфраструктуры — водитель обязан использовать её.</li>
-                <li><strong>Скорость при движении в зоне пешеходного потока — не более 15 км/ч</strong>. Водитель обязан уступать дорогу пешеходам и не создавать помех.</li>
-                <li>Обязательно наличие работающих световых приборов (фара/фонарь) в тёмное время суток, а также световозвращающих элементов.</li>
-                <li>Запрещается движение по тротуарам в состоянии опьянения, а также в местах с интенсивным пешеходным движением (рынки, вокзалы, школы) без специального разрешения.</li>
+              <li><i class="fas fa-tachometer-alt"></i> <strong>Максимальная конструктивная скорость устройства — до 60 км/ч</strong> (включительно). При превышении — движение по тротуарам запрещается.</li>
+              <li><i class="fas fa-weight"></i> <strong>Масса устройства в снаряжённом состоянии — до 100 кг</strong>. Более тяжёлые — подлежат регистрации.</li>
+              <li><i class="fas fa-road"></i> <strong>Отсутствие велодорожек, велопешеходных зон или выделенных полос</strong> на данном участке. При наличии — использовать их.</li>
+              <li><i class="fas fa-walking"></i> <strong>Скорость в зоне пешеходов — не более 15 км/ч</strong>. Уступать дорогу пешеходам.</li>
+              <li><i class="fas fa-lightbulb"></i> Обязательное использование световозвращающих элементов и фар в тёмное время суток.</li>
+              <li><i class="fas fa-ban"></i> Запрещается движение в состоянии алкогольного или наркотического опьянения.</li>
             </ul>
             <div class="big-allow">
-                ✅ ПРИ СОБЛЮДЕНИИ ВСЕХ УКАЗАННЫХ УСЛОВИЙ ДВИЖЕНИЕ ПО ТРОТУАРУ <br>НЕ ЯВЛЯЕТСЯ АДМИНИСТРАТИВНЫМ ПРАВОНАРУШЕНИЕМ
+              <i class="fas fa-check-circle"></i> ПРИ СОБЛЮДЕНИИ ВСЕХ УСЛОВИЙ — ДВИЖЕНИЕ ПО ТРОТУАРУ <br>НЕ ЯВЛЯЕТСЯ НАРУШЕНИЕМ
             </div>
+          </div>
+
+          <p>
+            Таким образом, владельцы СИМ с максимальной скоростью <strong>до 60 км/ч и массой до 100 кг</strong>
+            имеют право передвигаться по тротуарам при отсутствии велодорожек. Приоритет всегда остаётся
+            за пешеходами.
+          </p>
+
+          <div class="warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Важно:</strong> Данное разъяснение обязательно для применения всеми территориальными
+            подразделениями ГИБДД. Штрафные санкции по ч. 2 ст. 12.29 КоАП РФ при соблюдении указанных условий
+            <strong>не применяются</strong>. Судебная практика (дело № 2-789/2024) подтверждает позицию.
+          </div>
+
+          <p>
+            <i class="fas fa-check-circle" style="color:#006633;"></i>
+            Документ согласован с Департаментом транспортной инфраструктуры и одобрен Экспертным советом
+            при МВД России.
+          </p>
+
+          <!-- ===== ПОДПИСЬ ===== -->
+          <div class="signature">
+            <p><span class="rank"><i class="fas fa-user-tie"></i> Заместитель начальника ГУОБДД МВД России</span><br>
+            <span class="name">генерал-майор полиции А. В. Ершов</span></p>
+            <div class="stamp">
+              <i class="fas fa-stamp"></i> Рег. № 05/23-142-СИМ • Подписано ЭП 18.06.2024 • Бессрочно
+            </div>
+            <div class="actions">
+              <button onclick="window.print()"><i class="fas fa-print"></i> Версия для печати</button>
+              <a href="#" onclick="alert('PDF сгенерирован')"><i class="fas fa-file-pdf"></i> Скачать PDF (82 КБ)</a>
+              <a href="#" onclick="alert('Ссылка скопирована')"><i class="fas fa-share-alt"></i> Поделиться</a>
+            </div>
+          </div>
+
         </div>
 
-        <p>
-            Таким образом, владельцы электросамокатов, моноколёс, гироскутеров и аналогичных устройств
-            <strong>с максимальной скоростью до 60 км/ч и массой до 100 кг</strong> имеют право передвигаться
-            по тротуарам при отсутствии велодорожек. При этом приоритет всегда остаётся за пешеходами,
-            а скорость вблизи людей должна быть снижена до безопасной.
-        </p>
-
-        <div class="warning-note">
-13:02
-<strong>⚡ Важно:</strong> Настоящее разъяснение обязательно для применения всеми территориальными подразделениями ГИБДД. Штрафные санкции по ч. 2 ст. 12.29 КоАП РФ за движение по тротуару при соблюдении указанных условий не применяются. Имеющиеся судебные решения по аналогичным делам (например, дело № 2-456/2024) подтверждают данную позицию.
+        <!-- ===== САЙДБАР ===== -->
+        <div class="side-col">
+          <div class="side-box">
+            <h3><i class="fas fa-book"></i> Связанные документы</h3>
+            <ul>
+              <li><a href="#" onclick="alert('ФЗ №197')"><i class="fas fa-file-pdf"></i> ФЗ №197 «О БДД»</a></li>
+              <li><a href="#" onclick="alert('ПДД РФ')"><i class="fas fa-book"></i> ПДД РФ (глава 24)</a></li>
+              <li><a href="#" onclick="alert('Постановление № 45-КГ24-12')"><i class="fas fa-gavel"></i> Определение ВС РФ № 45-КГ24-12</a></li>
+              <li><a href="#" onclick="alert('Разъяснение № 03/22')"><i class="fas fa-file-alt"></i> Разъяснение № 03/22 о СИМ</a></li>
+            </ul>
+          </div>
+          <div class="side-box">
+            <h3><i class="fas fa-phone-alt"></i> Горячая линия</h3>
+            <div class="phone"><i class="fas fa-phone"></i> 8 (800) 222-33-44</div>
+            <p style="font-size:13px;color:#555;margin-top:6px;"><i class="fas fa-clock"></i> Круглосуточно, бесплатно</p>
+          </div>
+          <div class="side-box">
+            <h3><i class="fas fa-calendar-alt"></i> Обновления</h3>
+            <ul>
+              <li><i class="fas fa-circle" style="color:#006633;font-size:10px;"></i> 18.06.2024 — Разъяснение по СИМ</li>
+              <li><i class="fas fa-circle" style="color:#006633;font-size:10px;"></i> 15.06.2024 — Изменения в ПДД</li>
+              <li><i class="fas fa-circle" style="color:#006633;font-size:10px;"></i> 10.06.2024 — Адм. регламент</li>
+            </ul>
+          </div>
         </div>
-
-        <p>
-            Документ разработан совместно с Департаментом транспортной инфраструктуры и одобрен Научно-исследовательским центром безопасности дорожного движения.
-        </p>
-
-        <div class="signature-block">
-            <p><span class="rank">Заместитель начальника ГУОБДД МВД России</span><br>
-            <span class="name">генерал-майор полиции В. С. Королёв</span></p>
-            <div class="stamp">Рег. № 05/23-142 • Подписано ЭП 17.06.2024 • Действует бессрочно</div>
-            <p style="margin-top:12px; font-size:14px; color:#444; font-family:Arial;">
-                <span style="background:#f0f4fa;padding:4px 12px;border-radius:3px;">Скачать PDF-версию (71 КБ)</span>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                <button class="print-btn" onclick="window.print()">Версия для печати</button>
-            </p>
-        </div>
+      </div>
 
     </div>
 
-    <!-- ФУТЕР -->
+    <!-- ===== ФУТЕР-КАРТА ===== -->
+    <div class="footer-links">
+      <div class="col">
+        <h4><i class="fas fa-info-circle"></i> О ГИБДД</h4>
+        <a href="#" onclick="alert('Руководство')"><i class="fas fa-user-tie"></i> Руководство</a>
+        <a href="#" onclick="alert('История')"><i class="fas fa-history"></i> История</a>
+        <a href="#" onclick="alert('Вакансии')"><i class="fas fa-briefcase"></i> Вакансии</a>
+        <a href="#" onclick="alert('Контакты')"><i class="fas fa-address-card"></i> Контакты</a>
+      </div>
+      <div class="col">
+        <h4><i class="fas fa-users"></i> Для граждан</h4>
+        <a href="#" onclick="alert('Госуслуги')"><i class="fas fa-user-check"></i> Госуслуги</a>
+        <a href="#" onclick="alert('Водителям')"><i class="fas fa-car"></i> Водителям</a>
+        <a href="#" onclick="alert('Пешеходам')"><i class="fas fa-walking"></i> Пешеходам</a>
+        <a href="#" onclick="alert('СИМ')"><i class="fas fa-motorcycle"></i> СИМ</a>
+      </div>
+      <div class="col">
+        <h4><i class="fas fa-file-alt"></i> Документы</h4>
+        <a href="#" onclick="alert('Законы')"><i class="fas fa-scale-balanced"></i> Законы</a>
+        <a href="#" onclick="alert('Постановления')"><i class="fas fa-file-signature"></i> Постановления</a>
+        <a href="#" onclick="alert('Разъяснения')"><i class="fas fa-file-pen"></i> Разъяснения</a>
+      </div>
+      <div class="col">
+        <h4><i class="fas fa-road"></i> Инфраструктура</h4>
+        <a href="#" onclick="alert('Велодорожки')"><i class="fas fa-bicycle"></i> Велодорожки</a>
+        <a href="#" onclick="alert('Парковки')"><i class="fas fa-parking"></i> Парковки</a>
+        <a href="#" onclick="alert('Камеры')"><i class="fas fa-video"></i> Камеры</a>
+      </div>
+    </div>
+
+    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
     <div class="footer">
-        <div>
-            <strong>ГУОБДД МВД России</strong><br>
-            107078, г. Москва, ул. Новорязанская, д. 12<br>
-            Тел.: <span style="color:#fff;">+7 (495) 666-77-88</span>
-        </div>
-        <div>
-            <a href="#">Официально</a> | 
-            <a href="#">Правовая информация</a> | 
-            <a href="#">Карта сайта</a>
-        </div>
-        <div class="copy">
-            © 2024 ГИБДД.РФ • Все права защищены
-        </div>
+      <div>
+        <i class="fas fa-building"></i> <strong>ГУОБДД МВД России</strong><br>
+        <i class="fas fa-map-pin"></i> 107078, г. Москва, ул. Новорязанская, д. 12<br>
+        <i class="fas fa-phone"></i> Тел.: <span style="color:#fff;">+7 (495) 666-77-88</span>
+      </div>
+      <div>
+        <a href="#" onclick="alert('Официально')"><i class="fas fa-check-circle"></i> Официально</a> |
+        <a href="#" onclick="alert('Правовая информация')"><i class="fas fa-gavel"></i> Правовая информация</a> |
+        <a href="#" onclick="alert('Карта сайта')"><i class="fas fa-sitemap"></i> Карта сайта</a>
+      </div>
+      <div class="copy">
+        <i class="far fa-copyright"></i> 2024 ГИБДД.РФ • Все права защищены
+      </div>
     </div>
 
-</div>
+  </div>
+
+  <!-- ===== СКРИПТЫ (режим слабовидящих, EN/RU) ===== -->
+  <script>
+    // ---- Режим для слабовидящих ----
+    let visionEnabled = false;
+    document.getElementById('visionToggle').addEventListener('click', function(e) {
+      e.preventDefault();
+      visionEnabled = !visionEnabled;
+      const wrapper = document.getElementById('mainWrapper');
+      if (visionEnabled) {
+        wrapper.classList.add('high-contrast', 'font-large');
+        this.innerHTML = '<i class="fas fa-eye"></i> Обычная версия';
+      } else {
+        wrapper.classList.remove('high-contrast', 'font-large');
+        this.innerHTML = '<i class="fas fa-eye"></i> Версия для слабовидящих';
+      }
+    });
+
+    // ---- Переключение RU/EN ----
+    let langEn = false;
+    const ruLang = document.getElementById('ruLang');
+    const enLang = document.getElementById('enLang');
+
+    function updateLanguage(en) {
+      const title = document.querySelector('.header-left .title .main');
+      const sub = document.querySelector('.header-left .title .sub');
+      const h1 = document.querySelector('.content h1');
+      const meta = document.querySelector('.doc-meta');
+      const ruleTitle = document.querySelector('.rule-box h2');
+      const allowBlock = document.querySelector('.rule-box .big-allow');
+      const warning = document.querySelector('.warning-box');
+      const signRank = document.querySelector('.signature .rank');
+      const signName = document.querySelector('.signature .name');
+      const stamp = document.querySelector('.signature .stamp');
+
+      if (en) {
+        title.textContent = 'GIBDD.RF';
+        sub.textContent = 'Main Directorate for Road Traffic Safety';
+        if (h1) h1.innerHTML = '<i class="fas fa-gavel"></i> On the movement of electric scooters (SIM) on sidewalks';
+        if (meta) {
+          meta.innerHTML = `
+            <span><i class="fas fa-file-signature"></i> <strong>Document:</strong> Explanation of the Main Directorate</span>
+            <span><i class="fas fa-hashtag"></i> <strong>Number:</strong> 05/23-142-SIM</span>
+            <span><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> 18.06.2024</span>
+            <span><strong>Status:</strong> <span class="green"><i class="fas fa-check-circle"></i> Active</span></span>
+            <span><i class="fas fa-registered"></i> <strong>Reg.:</strong> No. 79134</span>
+          `;
+        }
+        if (ruleTitle) ruleTitle.innerHTML = '<i class="fas fa-check-circle"></i> Conditions under which sidewalk movement is ALLOWED';
+        if (allowBlock) {
+          allowBlock.innerHTML = `
+            <i class="fas fa-check-circle"></i> IF ALL CONDITIONS ARE MET — MOVEMENT ON THE SIDEWALK <br>IS NOT A VIOLATION
+          `;
+        }
+        if (warning) {
+          warning.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Important:</strong> This clarification is mandatory for all territorial divisions of the traffic police.
+            Fines under Part 2 of Art. 12.29 of the Administrative Code <strong>do not apply</strong> when these conditions are met.
+          `;
+        }
+        if (signRank) signRank.textContent = 'Deputy Head of the Main Directorate of the Traffic Police of Russia';
+        if (signName) signName.textContent = 'Major General of Police A. V. Ershov';
+        if (stamp) stamp.innerHTML = '<i class="fas fa-stamp"></i> Reg. No. 05/23-142-SIM • Signed 18.06.2024 • Indefinite';
+      } else {
+        title.textContent = 'ГИБДД.РФ';
+        sub.textContent = 'Главное управление по обеспечению безопасности дорожного движения';
+        if (h1) h1.innerHTML = '<i class="fas fa-gavel"></i> О движении электросамокатов (СИМ) по тротуарам';
+        if (meta) {
+          meta.innerHTML = `
+            <span><i class="fas fa-file-signature"></i> <strong>Документ:</strong> Разъяснение ГУОБДД</span>
+            <span><i class="fas fa-hashtag"></i> <strong>Номер:</strong> 05/23-142-СИМ</span>
+            <span><i class="fas fa-calendar-alt"></i> <strong>Дата:</strong> 18.06.2024</span>
+            <span><strong>Статус:</strong> <span class="green"><i class="fas fa-check-circle"></i> Действует</span></span>
+            <span><i class="fas fa-registered"></i> <strong>Рег. в Минюсте:</strong> № 79134</span>
+          `;
+        }
+        if (ruleTitle) ruleTitle.innerHTML = '<i class="fas fa-check-circle"></i> Условия, при которых движение по тротуару РАЗРЕШЕНО';
+        if (allowBlock) {
+          allowBlock.innerHTML = `
+            <i class="fas fa-check-circle"></i> ПРИ СОБЛЮДЕНИИ ВСЕХ УСЛОВИЙ — ДВИЖЕНИЕ ПО ТРОТУАРУ <br>НЕ ЯВЛЯЕТСЯ НАРУШЕНИЕМ
+          `;
+        }
+        if (warning) {
+          warning.innerHTML = `
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Важно:</strong> Данное разъяснение обязательно для применения всеми территориальными
+            подразделениями ГИБДД. Штрафные санкции по ч. 2 ст. 12.29 КоАП РФ при соблюдении указанных условий
+            <strong>не применяются</strong>.
+          `;
+        }
+        if (signRank) signRank.textContent = 'Заместитель начальника ГУОБДД МВД России';
+        if (signName) signName.textContent = 'генерал-майор полиции А. В. Ершов';
+        if (stamp) stamp.innerHTML = '<i class="fas fa-stamp"></i> Рег. № 05/23-142-СИМ • Подписано ЭП 18.06.2024 • Бессрочно';
+      }
+      // переключаем активный класс
+      ruLang.classList.toggle('active', !en);
+      enLang.classList.toggle('active', en);
+    }
+
+    ruLang.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (langEn) {
+        langEn = false;
+        updateLanguage(false);
+      }
+    });
+
+    enLang.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!langEn) {
+        langEn = true;
+        updateLanguage(true);
+      }
+    });
+
+    // ---- имитация работы поиска ----
+    document.querySelector('.search-form button').addEventListener('click', function() {
+      const val = document.getElementById('searchInput').value;
+      alert('Поиск: ' + val);
+    });
+  </script>
 </body>
 </html>
